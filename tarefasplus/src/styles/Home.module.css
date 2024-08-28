@@ -40,4 +40,8 @@
   padding: 8px 24px;
   color: #0f0f0f;
   border-radius: 4px;
+  transition: all 0.4s;
+  &:hover {
+    padding: 10px 28px;
+  }
 }
