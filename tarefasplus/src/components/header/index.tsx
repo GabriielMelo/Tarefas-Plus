@@ -17,6 +17,6 @@ export default function Header() {
         </nav>
         <button className={styles.headerButton}>Acessar</button>
       </section>
-    </header>   
+    </header>
   );
 }
