@@ -7,6 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 .contentForm {
   width: 1024px;
@@ -28,6 +29,7 @@
 .checkbox {
   width: 18px;
   height: 18px;
+  cursor: pointer;
 }
 .button {
   border: none;
@@ -39,4 +41,66 @@
   color: var(--white-color);
   font-weight: 500;
   font-size: 18px;
+}
+.taskContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 38px;
+}
+.taskContainer h1 {
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 14px;
+  width: 100%;
+  max-width: 1024px;
+  padding: 0 18px;
+}
+.tagContainer {
+  display: flex;
+  gap: 0.7rem;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.tagContainer button {
+  background-color: transparent;
+  border: none;
+  margin-left: 10px;
+}
+.tagContainer label {
+  background-color: var(--blue-color);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--white-color);
+}
+.tasks {
+  margin-bottom: 14px;
+  line-height: 150%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1.5px solid #909090;
+  border-radius: 4px;
+  padding: 14px;
+  gap: 1rem;
+  max-width: 1024px;
+}
+.taskContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.taskContent p {
+  white-space: pre-wrap;
+  max-width: 95%;
+  text-align: justify;
+}
+.taskContent button {
+  border: none;
+  background-color: transparent;
+  margin-right: 5px;
+  position: relative;
+  bottom: 13px;
 }

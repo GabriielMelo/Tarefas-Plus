@@ -1,7 +1,7 @@
 import Textarea from "@/components/textarea";
 import Head from "next/head";
+import { FaCreativeCommonsShare, FaShare, FaTrash } from "react-icons/fa";
 import styles from "./styles.module.css";
-
 export default function Dashboard() {
   return (
     <main className={styles.container}>
@@ -12,15 +12,38 @@ export default function Dashboard() {
         <article className={styles.contentForm}>
           <h1 className={styles.title}>Qual a sua Tarefa?</h1>
           <form>
-            <Textarea 
-            placeholder="Digite sua tarefa..."
-            />
+            <Textarea placeholder="Digite sua tarefa..." />
             <div className={styles.checkboxArea}>
-              <input type="checkbox" className={styles.checkbox}/>
+              <input type="checkbox" className={styles.checkbox} />
               <label>Deixar a tarefa pública?</label>
             </div>
             <button className={styles.button}>Registrar</button>
           </form>
+        </article>
+      </section>
+      <section className={styles.taskContainer}>
+        <h1>Minhas Tarefas </h1>
+        <article className={styles.tasks}>
+          <div className={styles.tagContainer}>
+            <label className={styles.tag}>Público</label>
+            <button>
+              <FaCreativeCommonsShare size={22} color="#3183ff" />
+            </button>
+            <button>
+              <FaShare size={22} color="#3183ff" />
+            </button>
+          </div>
+
+          <div className={styles.taskContent}>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos
+              eligendi odio architecto voluptatem iusto animi culpa maxime
+              veniam labore quam possimus praesentium sed itaque modi
+            </p>
+            <button>
+              <FaTrash size={22} color="#ea3140" />
+            </button>
+          </div>
         </article>
       </section>
     </main>
