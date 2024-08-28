@@ -31,7 +31,7 @@ export default function Dashboard() {
             </button>
             <button>
               <FaShare size={22} color="#3183ff" />
-            </button>
+            </button> 
           </div>
 
           <div className={styles.taskContent}>
