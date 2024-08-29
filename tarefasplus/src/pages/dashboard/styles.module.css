@@ -60,8 +60,8 @@
 .tagContainer {
   display: flex;
   gap: 0.7rem;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   flex-direction: row;
 }
 .tagContainer button {
@@ -81,12 +81,12 @@
   line-height: 150%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   border: 1.5px solid #909090;
   border-radius: 4px;
   padding: 14px;
   gap: 1rem;
   max-width: 1024px;
+  width: 100%;
 }
 .taskContent {
   display: flex;
@@ -95,13 +95,10 @@
 }
 .taskContent p {
   white-space: pre-wrap;
-  max-width: 95%;
   text-align: justify;
 }
 .taskContent button {
   border: none;
   background-color: transparent;
   margin-right: 5px;
-  position: relative;
-  bottom: 13px;
 }
