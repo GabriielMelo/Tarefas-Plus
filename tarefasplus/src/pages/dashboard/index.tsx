@@ -1,8 +1,17 @@
 import Textarea from "@/components/textarea";
+import { GetServerSideProps } from "next";
+import { getSession } from "next-auth/react";
 import Head from "next/head";
 import { FaCreativeCommonsShare, FaShare, FaTrash } from "react-icons/fa";
 import styles from "./styles.module.css";
-export default function Dashboard() {
+
+interface HomeProps {
+  user: {
+    email: string;
+  };
+}
+
+export default function Dashboard({ user }: HomeProps) {
   return (
     <main className={styles.container}>
       <Head>
@@ -31,7 +40,7 @@ export default function Dashboard() {
             </button>
             <button>
               <FaShare size={22} color="#3183ff" />
-            </button> 
+            </button>
           </div>
 
           <div className={styles.taskContent}>
@@ -49,3 +58,20 @@ export default function Dashboard() {
     </main>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const session = await getSession({ req });
+  if (!session?.user) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {
+      user: session?.user?.email,
+    },
+  };
+};
