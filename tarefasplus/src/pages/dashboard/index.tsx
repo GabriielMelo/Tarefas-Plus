@@ -1,11 +1,12 @@
 import Textarea from "@/components/textarea";
+import { addDoc, collection } from "firebase/firestore";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { FaCreativeCommonsShare, FaShare, FaTrash } from "react-icons/fa";
-import styles from "./styles.module.css";
 
+import styles from "./styles.module.css";
 interface HomeProps {
   user: {
     email: string;
@@ -24,17 +25,27 @@ export default function Dashboard({ user }: HomeProps) {
   const [publicTask, setPublicTask] = useState(false);
   const [tasks, setTasks] = useState<TaskProps[]>([]);
 
-
   function handleChangePublicTask(event: ChangeEvent<HTMLInputElement>) {
     setPublicTask(event.target.checked);
   }
-  function handleAddTask(event:FormEvent){
+  async function handleAddTask(event: FormEvent) {
     event.preventDefault();
-    if(input === ''){
-      alert('Invalid Task');
-      return
+    if (input === "") {
+      alert("Invalid Task");
+      return;
     }
-      
+    try {
+      await addDoc(collection(db, "tasks"), {
+        task: input,
+        created: new Date(),
+        user: user?.email,
+        public: publicTask,
+      });
+      setPublicTask(false);
+      setInput("");
+    } catch (err) {
+      console.log(err);
+    }
   }
   return (
     <main className={styles.container}>
@@ -44,7 +55,7 @@ export default function Dashboard({ user }: HomeProps) {
       <section className={styles.content}>
         <article className={styles.contentForm}>
           <h1 className={styles.title}>Qual a sua Tarefa?</h1>
-          <form>
+          <form onSubmit={handleAddTask}>
             <Textarea
               placeholder="Digite sua tarefa..."
               value={input}
@@ -61,7 +72,9 @@ export default function Dashboard({ user }: HomeProps) {
               />
               <label>Deixar a tarefa pública?</label>
             </div>
-            <button className={styles.button}>Registrar</button>
+            <button className={styles.button} type="submit">
+              Registrar
+            </button>
           </form>
         </article>
       </section>
@@ -106,7 +119,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   }
   return {
     props: {
-      user: session?.user?.email,
+      user: {
+        email: session?.user?.email,
+      },
     },
   };
 };
