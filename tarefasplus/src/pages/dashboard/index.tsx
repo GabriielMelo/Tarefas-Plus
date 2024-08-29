@@ -2,6 +2,7 @@ import Textarea from "@/components/textarea";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { FaCreativeCommonsShare, FaShare, FaTrash } from "react-icons/fa";
 import styles from "./styles.module.css";
 
@@ -10,8 +11,31 @@ interface HomeProps {
     email: string;
   };
 }
+interface TaskProps {
+  id: string;
+  created: Date;
+  public: boolean;
+  user: string;
+  task: string;
+}
 
 export default function Dashboard({ user }: HomeProps) {
+  const [input, setInput] = useState("");
+  const [publicTask, setPublicTask] = useState(false);
+  const [tasks, setTasks] = useState<TaskProps[]>([]);
+
+
+  function handleChangePublicTask(event: ChangeEvent<HTMLInputElement>) {
+    setPublicTask(event.target.checked);
+  }
+  function handleAddTask(event:FormEvent){
+    event.preventDefault();
+    if(input === ''){
+      alert('Invalid Task');
+      return
+    }
+      
+  }
   return (
     <main className={styles.container}>
       <Head>
@@ -21,9 +45,20 @@ export default function Dashboard({ user }: HomeProps) {
         <article className={styles.contentForm}>
           <h1 className={styles.title}>Qual a sua Tarefa?</h1>
           <form>
-            <Textarea placeholder="Digite sua tarefa..." />
+            <Textarea
+              placeholder="Digite sua tarefa..."
+              value={input}
+              onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
+                setInput(event.target.value)
+              }
+            />
             <div className={styles.checkboxArea}>
-              <input type="checkbox" className={styles.checkbox} />
+              <input
+                type="checkbox"
+                className={styles.checkbox}
+                checked={publicTask}
+                onChange={handleChangePublicTask}
+              />
               <label>Deixar a tarefa pública?</label>
             </div>
             <button className={styles.button}>Registrar</button>
