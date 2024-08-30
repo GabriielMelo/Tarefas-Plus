@@ -24,6 +24,7 @@ export default function Header() {
         ) : session ? (
           <button className={styles.headerButton} onClick={() => signOut()}>
             Olá {session?.user?.name}
+          
           </button>
         ) : (
           <button

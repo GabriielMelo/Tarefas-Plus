@@ -59,7 +59,7 @@
 }
 .tagContainer {
   display: flex;
-  gap: 0.7rem;
+  gap: 0.3rem;
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: row;
@@ -69,12 +69,14 @@
   border: none;
   margin-left: 10px;
 }
-.tagContainer label {
+.tag {
   background-color: var(--blue-color);
-  padding: 4px 6px;
+  padding: 8px 16px;
   border-radius: 4px;
   color: var(--white-color);
   font-size: 12px;
+  text-align: center;
+  margin-left: 10px;
 }
 .tasks {
   margin-bottom: 14px;
@@ -96,9 +98,35 @@
 .taskContent p {
   white-space: pre-wrap;
   text-align: justify;
+  max-width: 80%;
+}
+.taskLink {
+  color: var(--black-color);
+  white-space: pre-wrap;
+  text-align: justify;
+  max-width: 80%;
 }
 .taskContent button {
   border: none;
   background-color: transparent;
   margin-right: 5px;
+}
+.profileImage {
+  border-radius: 50%;
+}
+.taskInfo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 3rem;
+}
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  align-items: center;
+}
+.profileInfo span {
+  font-weight: 500;
+  color: var(--blue-color);
 }

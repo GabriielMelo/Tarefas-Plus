@@ -2,6 +2,8 @@ import Textarea from "@/components/textarea";
 import {
   addDoc,
   collection,
+  deleteDoc,
+  doc,
   onSnapshot,
   orderBy,
   query,
@@ -9,6 +11,7 @@ import {
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import Head from "next/head";
+import Image from "next/image";
 import Link from "next/link";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { FaCreativeCommonsShare, FaShare, FaTrash } from "react-icons/fa";
@@ -17,6 +20,8 @@ import styles from "./styles.module.css";
 interface HomeProps {
   user: {
     email: string;
+    image: string;
+    name: string;
   };
 }
 interface TaskProps {
@@ -59,7 +64,10 @@ export default function Dashboard({ user }: HomeProps) {
       `${process.env.NEXT_PUBLIC_URL}/task/${id}`
     );
   }
-
+  async function handleDeleteTask(id: string) {
+    const docRef = doc(db, "tasks", id);
+    deleteDoc(docRef);
+  }
   function handleChangePublicTask(event: ChangeEvent<HTMLInputElement>) {
     setPublicTask(event.target.checked);
   }
@@ -120,35 +128,63 @@ export default function Dashboard({ user }: HomeProps) {
             <article key={task.id} className={styles.tasks}>
               {task.public && (
                 <div className={styles.tagContainer}>
-                  <label className={styles.tag}>Público</label>
-                  <button title="copy">
-                    <FaCreativeCommonsShare
-                      size={22}
-                      color="#3183ff"
-                      onClick={() => handleCopyLink(task.id)}
-                    />
-                  </button>
-                  <button>
-                    <Link
-                      href={`/task/${task.id}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FaShare size={22} color="#3183ff" />
-                    </Link>
-                  </button>
-                </div>
+                 
+                    <label className={styles.tag}>Público</label>
+                  
+                  
+                    <button title="copy">
+                      <FaCreativeCommonsShare
+                        size={22}
+                        color="#3183ff"
+                        onClick={() => handleCopyLink(task.id)}
+                      />
+                    </button>
+                    <button>
+                      <Link
+                        href={`/task/${task.id}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <FaShare size={22} color="#3183ff" />
+                      </Link>
+                    </button>
+                  </div>
+                
               )}
 
               <div className={styles.taskContent}>
                 {task.public ? (
-                  <Link href={`/task/${task.id}`}>
-                    <p>{task.task}</p>
-                  </Link>
+                  <div className={styles.taskInfo}>
+                    <div className={styles.profileInfo}>
+                      <Image
+                        src={user?.image}
+                        alt="profile image"
+                        className={styles.profileImage}
+                        width={50}
+                        height={50}
+                      />
+                      <span>{user?.name}</span>
+                    </div>
+                    <Link href={`/task/${task.id}`} className={styles.taskLink}>
+                      <p>{task.task}</p>
+                    </Link>
+                  </div>
                 ) : (
-                  <p>{task.task}</p>
+                  <div className={styles.taskInfo}>
+                    <div className={styles.profileInfo}>
+                      <Image
+                        src={user?.image}
+                        alt="profile image"
+                        className={styles.profileImage}
+                        width={50}
+                        height={50}
+                      />
+                      <span>{user?.name}</span>
+                    </div>
+                    <p>{task.task}</p>
+                  </div>
                 )}
-                <button>
+                <button onClick={() => handleDeleteTask(task.id)}>
                   <FaTrash size={22} color="#ea3140" />
                 </button>
               </div>
@@ -174,6 +210,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     props: {
       user: {
         email: session?.user?.email,
+        image: session?.user?.image,
+        name: session?.user?.name,
       },
     },
   };
