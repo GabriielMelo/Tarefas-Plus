@@ -34,6 +34,7 @@ interface TaskProps {
 
 export default function Dashboard({ user }: HomeProps) {
   const [input, setInput] = useState("");
+
   const [publicTask, setPublicTask] = useState(false);
   const [tasks, setTasks] = useState<TaskProps[]>([]);
 
@@ -100,8 +101,9 @@ export default function Dashboard({ user }: HomeProps) {
           <h1 className={styles.title}>Qual a sua Tarefa?</h1>
           <form onSubmit={handleAddTask}>
             <Textarea
-              placeholder="Digite sua tarefa..."
+              placeholder="Digite a tarefa...(máximo 150 caracteres)"
               value={input}
+              maxLength={150}
               onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
                 setInput(event.target.value)
               }
@@ -122,34 +124,32 @@ export default function Dashboard({ user }: HomeProps) {
         </article>
       </section>
       <section className={styles.taskContainer}>
-        <h1>Minhas Tarefas </h1>
+        {tasks.length === 0 ? <h1>Adicione uma Tarefa</h1> : <h1>Tarefas </h1>}
+
         {tasks.map((task) => {
           return (
             <article key={task.id} className={styles.tasks}>
               {task.public && (
                 <div className={styles.tagContainer}>
-                 
-                    <label className={styles.tag}>Público</label>
-                  
-                  
-                    <button title="copy">
-                      <FaCreativeCommonsShare
-                        size={22}
-                        color="#3183ff"
-                        onClick={() => handleCopyLink(task.id)}
-                      />
-                    </button>
-                    <button>
-                      <Link
-                        href={`/task/${task.id}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <FaShare size={22} color="#3183ff" />
-                      </Link>
-                    </button>
-                  </div>
-                
+                  <label className={styles.tag}>Público</label>
+
+                  <button title="copy">
+                    <FaCreativeCommonsShare
+                      size={22}
+                      color="#3183ff"
+                      onClick={() => handleCopyLink(task.id)}
+                    />
+                  </button>
+                  <button>
+                    <Link
+                      href={`/task/${task.id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FaShare size={22} color="#3183ff" />
+                    </Link>
+                  </button>
+                </div>
               )}
 
               <div className={styles.taskContent}>
@@ -163,7 +163,7 @@ export default function Dashboard({ user }: HomeProps) {
                         width={50}
                         height={50}
                       />
-                      <span>{user?.name}</span>
+                      <span className={styles.profileName}>{user?.name}</span>
                     </div>
                     <Link href={`/task/${task.id}`} className={styles.taskLink}>
                       <p>{task.task}</p>
@@ -179,7 +179,7 @@ export default function Dashboard({ user }: HomeProps) {
                         width={50}
                         height={50}
                       />
-                      <span>{user?.name}</span>
+                      <span className={styles.profileName}>{user?.name}</span>
                     </div>
                     <p>{task.task}</p>
                   </div>
