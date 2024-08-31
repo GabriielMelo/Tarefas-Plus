@@ -111,8 +111,8 @@ export default function Task({ task, allComments }: TaskProps) {
           {comments.map((comment) => {
             return (
               <article key={comment.id} className={styles.comments}>
-                <div className={styles.profileComment}>
-                  <div className={styles.profileInfo}>
+                <div className={styles.profile}>
+                  <div className={styles.profileImage}>
                     <Image
                       src={comment.image}
                       width={50}
@@ -120,17 +120,25 @@ export default function Task({ task, allComments }: TaskProps) {
                       alt="user profile image"
                       className={styles.profileImage}
                     />
-                    <span>{comment.name}</span>
                   </div>
-                  <p className={styles.comment}>{comment.comment}</p>
+                  <div className={styles.profileComment}>
+                    <label>{comment.name}</label>
+                    <p>{comment.comment}</p>
+                  </div>
                 </div>
-                <button className={styles.trashButton}>
-                  <FaTrash
-                    size={18}
-                    color="#ea3140"
-                    onClick={() => handleDeleteComment(comment.id)}
-                  />
-                </button>
+                <div>
+                  {session?.user?.email === comment.user ? (
+                    <button className={styles.trashButton}>
+                      <FaTrash
+                        size={18}
+                        color="#ea3140"
+                        onClick={() => handleDeleteComment(comment.id)}
+                      />
+                    </button>
+                  ) : (
+                    <></>
+                  )}
+                </div>
               </article>
             );
           })}
