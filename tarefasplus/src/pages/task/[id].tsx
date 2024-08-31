@@ -16,16 +16,16 @@ export default function task() {
             <Textarea />
             <button className={styles.button}>Enviar comentário</button>
           </form>
-        </section>  
+        </section>
         <section className={styles.commentsContainer}>
           <h2>Todos os Comentários</h2>
           <article className={styles.comments}>
             <div className={styles.profileComment}>
-                <div className={styles.profileInfo}>
-                    <p>Image</p>
-                    <p>Name</p>
-                </div>
-                <p className={styles.comment}>cool</p>
+              <div className={styles.profileInfo}>
+                <p>Image</p>
+                <p>Name</p>
+              </div>
+              <p className={styles.comment}>cool</p>
             </div>
             <button className={styles.trashButton}>
               <FaTrash size={18} color="#ea3140" />
