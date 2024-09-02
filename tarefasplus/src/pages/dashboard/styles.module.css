@@ -1,147 +1,127 @@
 .container {
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
 }
 .content {
   background-color: var(--black-color);
-  width: 100%;
   display: flex;
+  flex-direction: column;
+  width: 100%;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  box-shadow: 0px 0px 16px black;
+  box-shadow: 0px 0px 16px var(--black-color);
+  color: var(--white-color);
 }
 .contentForm {
-  width: 1024px;
-  color: var(--white-color);
   display: flex;
   flex-direction: column;
-  margin-top: 58px;
-  gap: 1rem;
-}
-.title {
-  font-size: 28px;
-}
-.checkboxArea {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 12px auto;
-}
-.checkbox {
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-}
-.button {
-  border: none;
-  background-color: var(--blue-color);
-  padding: 12px;
-  width: 100%;
-  margin: 18px auto;
-  border-radius: 4px;
-  color: var(--white-color);
-  font-weight: 500;
-  font-size: 18px;
-}
-.taskContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 38px;
-}
-.taskContainer h1 {
-  font-size: 32px;
-  text-align: center;
-  margin-bottom: 14px;
+  gap: 0.7rem;
+  margin-top: 20px;
   width: 100%;
   max-width: 1024px;
-  padding: 0 18px;
+  margin-bottom: 10px;
 }
-.tagContainer {
+.checkContent {
   display: flex;
-  gap: 0.3rem;
-  justify-content: flex-end;
-  align-items: flex-start;
   flex-direction: row;
+  gap: 0.5rem;
+  margin-bottom: 20px;
 }
-.tagContainer button {
-  background-color: transparent;
-  border: none;
-  margin-left: 10px;
-}
-.tag {
-  background-color: var(--blue-color);
-  padding: 0px 4px;
-  border-radius: 4px;
-  color: var(--white-color);
-  font-size: 12px;
-  text-align: center;
-  margin-left: 10px;
-}
-.tasks {
-  margin-bottom: 14px;
-  line-height: 150%;
-  display: flex;
-  flex-direction: column;
-  border: 1.5px solid #909090;
-  border-radius: 4px;
-  padding: 14px;
-  gap: 1rem;
-  max-width: 1024px;
+.submitButton {
   width: 100%;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #3183ff;
+  padding: 12px 0;
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 .taskContent {
+  width: 100%;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 2rem;
+  margin-bottom: 10px;
+}
+.task {
+  max-width: 1024px;
+  width: 100%;
+  display: flex;
+  border: 1px solid var(--gray-color);
+  padding: 10px 20px 6px 20px;
+  gap: 1rem;
   justify-content: space-between;
-  align-items: center;
+
 }
-.taskContent p {
-  white-space: pre-wrap;
-  text-align: justify;
-  max-width: 80%;
-}
-.taskLink {
-  color: var(--black-color);
-  white-space: pre-wrap;
-  text-align: justify;
-  max-width: 80%;
-  transition: color 0.3s;
-  &:hover {
-    text-decoration: underline;
-    color: #909090;
-  }
-}
-.taskLink p {
-  max-width: 100%;
-}
-.taskContent button {
+.trashButton {
   border: none;
-  background-color: transparent;
-  margin-right: 5px;
+  padding: 0;
 }
-.profileImage {
-  border-radius: 5%;
-}
-.taskInfo {
+.profile {
   display: flex;
+  flex-direction: row;
+  gap: 1rem;
   align-items: center;
-  justify-content: flex-start;
-  gap: 2.4 rem;
+  justify-content: center;
 }
 .profileInfo {
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
-  align-items: center;
+  gap: 0.5rem;
 }
-
+.profileImage {
+  border-radius: 50%;
+}
+.tagContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-end;
+}
+.tags {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+}
 .profileName {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--black-color);
-
-  padding: 1px 8px;
+  color: var(--gray-color);
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.tagPrivacy {
+  color: var(--white-color);
+  font-size: 10px;
+  background-color: var(--blue-color);
+  padding: 2px 6px;
   border-radius: 4px;
-  text-align: center;
+}
+.tags button {
+  border: none;
+  background-color: transparent;
+}
+.taskDescription a {
+  text-decoration: none;
+  color: var(--black-color);
+  transition: color 0.3s;
+  &:hover {
+    color: var(--gray-color);
+  }
+}
+.taskDescription p{
+  font-size: 14px;
+  max-width: 99%;
+  text-align: justify;
 }
